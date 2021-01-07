@@ -1,0 +1,83 @@
+---
+layout: default
+title: Strapi on Digital Ocean + Netlify Functions
+---
+
+<style>
+    .corgi-kennel {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, 300px);
+        text-align: center;
+        
+    }
+
+    .corgi img {
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+        
+    }
+
+    .credit {
+        color: var(--text-muted);
+        font-weight: 200;
+        margin-top: 0;
+        
+    }
+
+    .reactions {
+        display: flex;
+        justify-content: space-around;
+        
+    }
+
+    .pet,
+    .boop {
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    .count {
+        color: var(--black);
+        font-size: 1.5rem;
+        font-weight: 900;
+        
+    }
+
+    .pet button,
+    .boop button {
+        background: var(--light-gray);
+        border: none;
+        border-radius: 0.25rem;
+        color: var(--gray-dark);
+        font-family: var(--font-family);
+        font-size: 1rem;
+        font-weight: 900;
+        padding: 0.25rem 0.5rem;
+        
+    }
+
+</style>
+
+ <h1>Look at These Good Doggos</h1>
+
+ <div class="corgi-kennel"></div>
+
+ <template id="corgi">
+     <div class="corgi">
+         <img src="" alt="" />
+         <p class="credit"></p>
+         <div class="reactions">
+             <div class="pet">
+                 <span class="count"></span>
+                 <button>Pet This Corgo</button>
+                 </div>
+             <div class="boop">
+                 <span class="count"></span>
+                 <button>Boop This Corgo</button>
+                 </div>
+             </div>
+         </div>
+     </template>
