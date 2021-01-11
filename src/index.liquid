@@ -83,15 +83,59 @@ title: Strapi on Digital Ocean + Netlify Functions
 </template>
 
 <script>
+    async function addReaction(corgi, node, type) {
+        const response = await fetch('/.netlify/functions/add-reaction', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    type,
+                    corgi,
+                }),
+                })
+            .then((res) => res.json())
+            .catch((err) => console.error(err));
+
+            // increment the counter’s value by 1
+            const countNode = node.querySelector('.count');
+        countNode.innerText = Number(countNode.innerText) + 1;
+    }
+
+
     async function loadCorgis() {
         const data = await fetch('/api/load-corgis')
         .then(
             (res) => res.json()
         )
         .catch(err => console.error(err));
+
+        const template = document.getElementById('corgi');
+        const container = document.querySelector('.corgi-kennel');
         
         data.forEach((corgi) => {
             console.log(corgi)
+                    // use the template to add the corgi information into a new DOM node
+            const node = template.content.cloneNode(true);
+
+            const img = node.querySelector('img');
+            img.src = corgi.photo;
+            img.alt = corgi.title;
+
+            node.querySelector('.credit').innerText = `Photo by ${corgi.credit}`;
+    
+                // show the current reaction counts for each corgi
+            const pets = corgi.reactions.filter((r) => r.type === 'pet');
+            const boops = corgi.reactions.filter((r) => r.type === 'boop');
+            const pet = node.querySelector('.pet');
+            const boop = node.querySelector('.boop');
+        
+            pet.querySelector('.count').innerText = pets.length;
+                boop.querySelector('.count').innerText = boops.length;
+        
+            // add the corgi to the page! show me that good doggo!
+            container.appendChild(node);
         });
     }
+    loadCorgis();
 </script>
