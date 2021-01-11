@@ -83,24 +83,30 @@ title: Strapi on Digital Ocean + Netlify Functions
 </template>
 
 <script>
+
     async function addReaction(corgi, node, type) {
+        // save the reaction to our backend using a serverless function
         const response = await fetch('/api/add-reaction', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    type,
-                    corgi,
-                }),
-                })
-            .then((res) => res.json())
-            .catch((err) => console.error(err));
-
-            // increment the counter’s value by 1
-            const countNode = node.querySelector('.count');
-            countNode.innerText = Number(countNode.innerText) + 1;
-    }
+            },
+            body: JSON.stringify({
+                type,
+                corgi,
+            }),
+        })
+        .then(
+            (res) => {
+                res.json()
+                console.log('T', res)
+            }
+        )
+        .catch((err) => console.error(err));
+        // increment the counter’s value by 1
+        const countNode = node.querySelector('.count');
+        countNode.innerText = Number(countNode.innerText) + 1;
+    };
 
 
     async function loadCorgis() {
@@ -114,8 +120,8 @@ title: Strapi on Digital Ocean + Netlify Functions
         const container = document.querySelector('.corgi-kennel');
         
         data.forEach((corgi) => {
-            console.log(corgi)
-                    // use the template to add the corgi information into a new DOM node
+            // console.log(corgi)
+            // use the template to add the corgi information into a new DOM node
             const node = template.content.cloneNode(true);
 
             const img = node.querySelector('img');
