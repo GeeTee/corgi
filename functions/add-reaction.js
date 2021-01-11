@@ -14,9 +14,9 @@ exports.handler = async (event) => {
     }),
   })
     .then(
-        (res) => {
+        (response) => {
             console.log('RR', res)
-            res.json()
+            response.json()
         }
     )
     .catch((err) => console.error(err));
