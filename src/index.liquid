@@ -84,7 +84,7 @@ title: Strapi on Digital Ocean + Netlify Functions
 
 <script>
     async function addReaction(corgi, node, type) {
-        const response = await fetch('/.netlify/functions/add-reaction', {
+        const response = await fetch('/api/add-reaction', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
